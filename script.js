@@ -26,4 +26,31 @@
         content.innerHTML += " Numer telefonu jest poprawny<br>";
     }
   })
+
+  draggableElement = document.getElementById('ex3_element');
+  draggableElement.draggable = "true";
+  draggableElement.addEventListener('dragstart', drag);
+  
+  containerOne = document.getElementById('ex3_one');
+  containerTwo = document.getElementById('ex3_two');
+  
+  containerOne.addEventListener('dragover', allowDrop);
+  containerTwo.addEventListener('dragover', allowDrop);
+  containerOne.addEventListener('drop', drop);
+  containerTwo.addEventListener('drop', drop);
+
+  function drag(event){
+    event.dataTransfer.setData("text", event.target.id);
+  }
+
+  function allowDrop(event){
+    event.preventDefault();
+  }
+
+  function drop(event){
+    event.preventDefault();
+    draggedElementId = event.dataTransfer.getData('text');
+    draggedElement = document.getElementById(draggedElementId);
+    event.target.appendChild(draggedElement);
+    }
 })();
