@@ -61,6 +61,7 @@
     const body = document.getElementById('postBody').value;
     const id = document.getElementById('postID').value;
     answer.innerHTML = 'Processing...';
+    window.alert("Loading...")
 
     answer.style.color="blue";
     answer.style.fontStyle = 'italic';
