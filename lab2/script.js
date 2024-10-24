@@ -39,25 +39,28 @@
   })
 
   cw2.addEventListener("click", function () {
-    
-    const title = document.getElementById("postTitle").value;
-    const body = document.getElementById("postBody").value;
-    const id = document.getElementById("postID").value;
-
+    //TODO
+    const title = document.getElementById('postTitle').value;
+    const body = document.getElementById('postBody').value;
+    const id = document.getElementById('postID').value;
+    answer.innerHTML = 'Processing...';
+    const postData = {
+      title: title,
+      body: body,
+      userId: id
+    }
     fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
-      body: JSON.stringify({
-        title: title,
-        body: body,
-        userId: id,
-      }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
+      body: JSON.stringify(postData)
     })
       .then((response) => response.json())
-      .then((json) => console.log(json));
-
+      .then((json) => {
+        answer.innerHTML = `Dodano nowy post o ID = ${json.id}`;
+        console.log('Odpowiedź z serwera:', json);
+      });
   })
 
   cw3.addEventListener("click", function () {
