@@ -61,6 +61,12 @@
     const body = document.getElementById('postBody').value;
     const id = document.getElementById('postID').value;
     answer.innerHTML = 'Processing...';
+
+    answer.style.color="blue";
+    answer.style.fontStyle = 'italic';
+    answer.style.fontSize = '40px';
+    answer.style.backgroundColor = '#f9f9f9';
+    
     const postData = {
       title: title,
       body: body,
