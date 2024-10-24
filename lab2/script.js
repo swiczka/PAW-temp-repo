@@ -16,7 +16,7 @@
     for (el of array){
       toInsert += `<li><u>Post nr ${el.id} użytkownika nr ${el.userId}</u><br>`;
       toInsert += `<b>${el.title}</b><br>`;
-      toInsert += `${el.body}<br><br></li>`;
+      toInsert += `${el.body}<br></li>`;
     }
     toInsert += "</ol>"
     return toInsert;
@@ -27,7 +27,7 @@
     console.log(post.id);
     toInsert += `<li><u>Post nr ${post.id} użytkownika nr ${post.userId}</u><br>`;
     toInsert += `<b>${post.title}</b><br>`;
-    toInsert += `${post.body}<br><br></li>`;
+    toInsert += `${post.body}<br></li>`;
     return toInsert;
   }
 
@@ -87,8 +87,26 @@
       });
   })
 
-  cw3.addEventListener("click", function () {
-    //TODO
-  })
+  cw3.addEventListener("click", async function () {
+  
+    const response = await fetch('https://my-json-server.typicode.com/swiczka/lab2_Cw3/posts');
+    const posts = await response.json();
+  
+    const comResponse = await fetch('https://my-json-server.typicode.com/swiczka/lab2_Cw3/comments');
+    const comments = await comResponse.json();
+    answer.innerHTML = "<ol>";
+  
+    for (post of posts) {
+      answer.innerHTML += prepareStringFromPost(post);
+      for (com of comments) {
+        if (com.postId === post.id) {
+          answer.innerHTML += `<p><u>User nr ${com.userId} says:</u> ${com.message}</p>`;
+        }
+      }
+      answer.innerHTML += "<br>";
+    }
+    answer.innerHTML += "</ol>";
+  });
+  
 
 })();
