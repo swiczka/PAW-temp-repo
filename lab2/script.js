@@ -56,7 +56,25 @@
   })
 
   cw2.addEventListener("click", function () {
-    //TODO
+    
+    const title = document.getElementById("postTitle").value;
+    const body = document.getElementById("postBody").value;
+    const id = document.getElementById("postID").value;
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: title,
+        body: body,
+        userId: id,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+
   })
 
   cw3.addEventListener("click", function () {
