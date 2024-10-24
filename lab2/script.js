@@ -4,6 +4,11 @@
   const cw2 = document.getElementById('cw2')
   const cw3 = document.getElementById('cw3')
   const answer = document.getElementById('answer')
+  const top = document.getElementById('top');
+
+  cw13Input = document.createElement("input", "text");
+  cw13Input.placeholder = "Post's id (1-100)";
+  top.appendChild(cw13Input);
 
   function prepareString(array){
     toInsert = "";
@@ -17,6 +22,15 @@
     return toInsert;
   }
 
+  function prepareStringFromPost(post){
+    var toInsert = ""; 
+    console.log(post.id);
+    toInsert += `<li><u>Post nr ${post.id} użytkownika nr ${post.userId}</u><br>`;
+    toInsert += `<b>${post.title}</b><br>`;
+    toInsert += `${post.body}<br><br></li>`;
+    return toInsert;
+  }
+
   example.addEventListener("click", function () {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
@@ -27,15 +41,18 @@
   })
 
   cw1.addEventListener("click", function () { 
+
     answer.innerHTML = "Loading...";
 
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(array => {
-        
-        toInsert = prepareString(array);
-        answer.innerHTML = toInsert;
-      })
+    var toInsert = "";
+  
+    fetch(`https://jsonplaceholder.typicode.com/posts/${cw13Input.value}`)
+    .then(response => response.json())
+    .then(post => {
+      toInsert = prepareStringFromPost(post);
+      answer.innerHTML += toInsert;
+    })
+    
   })
 
   cw2.addEventListener("click", function () {
