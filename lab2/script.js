@@ -82,7 +82,7 @@
       .then((response) => response.json())
       .then((json) => {
         answer.innerHTML = `Dodano nowy post o ID = ${json.id}`;
-        console.log('Odpowiedź z serwera:', json);
+        console.log('Wyswietlenie danych w konsoli:', json)
       });
   })
 
