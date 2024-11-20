@@ -34,12 +34,23 @@ app.get('/math/rectangle/:width/:height', (req, res) => {
 
 app.get('/math/power/:base/:exponent', (req, res) => {
 
+  
   const base = req.params.base;
   const exponent = req.params.exponent;
   const power = base**exponent;
+  const root = base**(1/2);
+  let result;
 
-  const result = {
-    power: power
+  if(req.query.root === 'true'){
+    result = {
+      result: power,
+      root: root
+    }
+  }
+  else{
+    result = {
+      result: power
+    }
   }
   res.json(result);
 });
