@@ -32,8 +32,17 @@ app.get('/math/rectangle/:width/:height', (req, res) => {
   res.json(result);
 });
 
+app.get('/math/power/:base/:exponent', (req, res) => {
 
-//TODO3
+  const base = req.params.base;
+  const exponent = req.params.exponent;
+  const power = base**exponent;
+
+  const result = {
+    power: power
+  }
+  res.json(result);
+});
 
 
 const PORT = process.env.PORT || 3000;
