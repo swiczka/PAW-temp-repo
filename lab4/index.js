@@ -34,24 +34,25 @@ app.get('/math/rectangle/:width/:height', (req, res) => {
 
 app.get('/math/power/:base/:exponent', (req, res) => {
 
-  
   const base = req.params.base;
   const exponent = req.params.exponent;
   const power = base**exponent;
   const root = base**(1/2);
   let result;
 
-  if(req.query.root === 'true'){
-    result = {
-      result: power,
-      root: root
-    }
+  if(isNaN(power) || isNaN(root)){
+    res.status(400).json({error: 'Invalid input'})
+    return;
   }
-  else{
-    result = {
-      result: power
-    }
-  }
+
+  result = (req.query.root === 'true') ? {
+    result: power,
+    root: root
+  } :
+  {
+    result: power
+  };
+ 
   res.json(result);
 });
 
