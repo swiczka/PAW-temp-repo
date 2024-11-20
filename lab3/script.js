@@ -4,6 +4,7 @@
   const cw1Input = document.getElementById("capitalName");
   const cw2Button = document.getElementById("cw2Button");
   const cw3Button = document.getElementById("cw3Button");
+  const cw4Button = document.getElementById("cw4Button");
 
   cw1Button.addEventListener("click", function (){
     fetch(`https://restcountries.com/v3.1/capital/${cw1Input.value}`)
@@ -89,7 +90,7 @@ cw2Button.addEventListener("click", async function () {
 
 cw3Button.addEventListener("click", async function () {
   answer.innerHTML = "Loading...";
-  const response = await fetch("https://www.ncei.noaa.gov/cdo-web/api/v2/locations", {
+  const response = await fetch("https://www.ncei.noaa.gov/cdo-web/api/v2/datasets", {
     method: 'GET',
     headers: {
       'token': apiToken
@@ -97,7 +98,9 @@ cw3Button.addEventListener("click", async function () {
   });
 
   const data = await response.json();
-  const locations = data.results;
+  const locations = data;
+
+  console.log(locations);
 
   answerString = `
     <table>
@@ -124,6 +127,19 @@ cw3Button.addEventListener("click", async function () {
 
   answerString += "</table>";
   answer.innerHTML = answerString;
+});
+
+cw4Button.addEventListener("click", async function(){
+  answer.innerHTML = "Loading...";
+  const response = await fetch("https://www.ncei.noaa.gov/cdo-web/api/v2/data?dataset=daily-summaries&stations=USC00457180,USC00390043", {
+    method: 'GET',
+    headers: {
+      'token': apiToken
+    }
+  });
+
+  const data = await response.json();
+  console.log(data);
 });
 
 })();
